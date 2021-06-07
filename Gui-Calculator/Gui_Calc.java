@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Gui_Calc extends JFrame implements ActionListener {
+public class Gui_Calc_ extends JFrame implements ActionListener {
 
 	// Initialization
 	private double x, y, answer;
@@ -20,7 +20,7 @@ public class Gui_Calc extends JFrame implements ActionListener {
 		
 
 
-	Gui_Calc() {
+	Gui_Calc_() {
 
 		// Frame
 		this.setSize(650, 650);
@@ -85,12 +85,15 @@ public class Gui_Calc extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		Button b = (Button) e.getSource();
-		String text = b.getText(); 
-		if (b instanceof DigitButton) {
-			textField.setText(textField.getText() + text); 
+		Button b = (Button) e.getSource(); // Casts the object into a button. Since I added actionListeners only to
+											// button I can cast the source to only buttons because the source will only
+											// be buttons. Also getSource returns object. B= e.getSource
+		String text = b.getText(); // Sets a string to equal to label of the button.
+		if (b instanceof DigitButton) {// Seeing if the source of the action is one of the DigitButton
+			textField.setText(textField.getText() + text); // adds text
 			field.setText(field.getText() + text);
-		} else if (b instanceof OperatorButton) { 
+		} else if (b instanceof OperatorButton) { // Checks if the source of the action is one of the OperatorButtons
+			operator = text;// sets operator equal to text
 			x = Double.parseDouble(textField.getText());
 			field.setText(textField.getText() + text);
 			textField.setText("");
@@ -98,7 +101,18 @@ public class Gui_Calc extends JFrame implements ActionListener {
 		} else if (b == equal) {
 			y = Double.parseDouble(textField.getText());
 
-			
+			/*
+			 * x = Double.parseDouble(textField.getText().split( Operator, 0)[0]);// So
+			 * first you use the get text // method to return the text. It // retunrs a
+			 * string. Then you // enter the regex character. // This character will be use
+			 * to // split the strings. In our // case the regex character is // reserved so
+			 * we have to escape // it by using \\. Then we set // the limit to 0. Meaning
+			 * that // the the split method can // split it as many times as it // wants. If
+			 * we said a split // limit of 2 then we could only // split it twice. Then we
+			 * get // the 0 index of the string // which would be the before the //
+			 * operator. y = Double.parseDouble(textField.getText().split( Operator, 0)[1]);
+			 * 
+			 */
 
 			switch (operator) {
 			case "+":
@@ -136,5 +150,5 @@ public class Gui_Calc extends JFrame implements ActionListener {
 		   cons.gridwidth = w;
 		   cons.gridheight = h;
 		   this.add(comp, cons);
-		 } 
+		 } //Use this method when you are going to use the gridbaglayout. 
 }
